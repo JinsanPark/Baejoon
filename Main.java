@@ -1,13 +1,24 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
 
-    //백준 1157번
-    //알파벳 입력받기
-    //Hashmap으로 빈도 수 체크. 대소문자 구분 X
-    //가장 많이 사용된 알파벳 대문자로 출력
-    //만일 가장 많이 사용된 알파벳이 2개 이상이면 ?출력
+        HashMap<String, Boolean> map = new HashMap<>();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] name = br.lines().toArray(String[]::new);
+        int N;
+        int M;
+
+
+        for (int i = 0; i < name.length; i++) {
+            map.put(name[i], true);
+        }
+
+
+
 
 
     }
