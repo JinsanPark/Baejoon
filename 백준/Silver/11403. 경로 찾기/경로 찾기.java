@@ -13,6 +13,7 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         N = Integer.parseInt(br.readLine());
         map = new int[N][N];
+        StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < N; i++) {
 
@@ -45,16 +46,18 @@ public class Main {
 
                 if(visited[j] == true) {
 
-                    System.out.print("1" + " ");
+                    sb.append("1 ");
 
                 } else {
-                    System.out.print("0" + " ");
+                    sb.append("0 ");
                 }
             }
 
-            System.out.println();
+            sb.append("\n");
 
         }
+
+        System.out.println(sb);
 
     }
 
