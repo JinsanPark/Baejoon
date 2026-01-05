@@ -14,18 +14,24 @@ public class Main {
         while (count < N) {
 
             num++;
-            String s = String.valueOf(num);
 
-            if (s.contains("666")) {
+            int temp = num;
 
-                count++;
+            while (temp >= 666) {
+
+                if (temp % 1000 == 666) {
+
+                    count++;
+                    break;
+
+                }
+
+                temp /= 10;
 
             }
-
         }
 
         System.out.println(num);
-
 
     }
 }
