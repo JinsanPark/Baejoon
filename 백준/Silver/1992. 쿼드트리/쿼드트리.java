@@ -6,12 +6,14 @@ public class Main {
 
     static int[][] matrix;
     static int N;
+    static StringBuilder st;
 
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         N = Integer.parseInt(br.readLine());
         matrix = new int[N][N];
+        st = new StringBuilder();
 
         for (int i = 0; i < N; i++) {
 
@@ -24,17 +26,18 @@ public class Main {
         }
 
         partition(0,0, N);
+        System.out.println(st);
 
     }
 
     public static void partition(int row, int col, int size) {
 
         if (check(row, col, size)) {
-            System.out.print(matrix[row][col]);
+            st.append(matrix[row][col]);
             return;
         }
 
-        System.out.print("(");
+        st.append("(");
 
         int newSize = size / 2;
 
@@ -43,7 +46,8 @@ public class Main {
         partition(row + newSize ,col,newSize);
         partition(row + newSize ,col + newSize ,newSize);
 
-        System.out.print(")");
+
+        st.append(")");
     }
 
     public static boolean check(int x, int y, int length) {
