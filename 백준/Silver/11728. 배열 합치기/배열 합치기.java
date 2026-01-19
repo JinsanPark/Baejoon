@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -16,7 +14,8 @@ public class Main {
         int M = Integer.parseInt(st.nextToken());
         int[] arrN = new int[N];
         int[] arrM = new int[M];
-        ArrayList<Integer> list = new ArrayList<>();
+        int pN = 0;
+        int pM = 0;
         StringBuilder sb = new StringBuilder();
 
         st = new StringTokenizer(br.readLine());
@@ -29,19 +28,24 @@ public class Main {
             arrM[i] = Integer.parseInt(st.nextToken());
         }
 
-        for (int i = 0; i < N; i++) {
-            list.add(arrN[i]);
+        while (pN < N && pM < M) {
+
+            if (arrN[pN] > arrM[pM]) {
+                sb.append(arrM[pM]).append(" ");
+                pM++;
+            } else {
+                sb.append(arrN[pN]).append(" ");
+                pN++;
+            }
+
         }
 
-        for (int i = 0; i < M; i++) {
-            list.add(arrM[i]);
+        while (pN < N) {
+            sb.append(arrN[pN++]).append(" ");
         }
 
-        Collections.sort(list);
-
-        for (int i = 0; i < list.size(); i++) {
-            sb.append(list.get(i));
-            sb.append(" ");
+        while (pM < M) {
+            sb.append(arrM[pM++]).append(" ");
         }
 
         System.out.println(sb);
