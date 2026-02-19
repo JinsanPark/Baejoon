@@ -2,52 +2,41 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
 
 public class Main {
     public static void main(String[] args) throws IOException {
 
-        int n;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String input = br.readLine();
-        n = Integer.parseInt(input);
-        Deque<Integer> stack = new ArrayDeque<>();
-        ArrayList<Integer> list = new ArrayList<>();
+        int n = Integer.parseInt(br.readLine());
         StringBuilder sb = new StringBuilder();
-        boolean isPossible = true;
 
-        for (int i = 1; i <= n; i++) {
+        ArrayDeque<Integer> stack = new ArrayDeque<>();
+        int start = 0;
 
-            String inputs = br.readLine();
-            int num = Integer.parseInt(inputs);
-            list.add(num);
+        for (int i = 0; i < n; i++) {
 
-        }
+            int target = Integer.parseInt(br.readLine());
 
-        int currentNum = 1;
-
-        for (int targetNum : list) {
-
-            while (currentNum <= targetNum) {
-                stack.push(currentNum);
-                currentNum++;
-                sb.append("+\n");
+            if (target > start) {
+                for (int j = start + 1; j <= target; j++) {
+                    stack.push(j);
+                    sb.append("+").append("\n");
+                }
+                start = target;
             }
 
-            if (stack.peek()  == targetNum) {
-                stack.pop();
-                sb.append("-\n");
-            } else {
-                isPossible = false;
+            if (stack.peek() != target) {
+                System.out.println("NO");
+                return;
             }
+
+            stack.pop();
+            sb.append("-").append("\n");
+
         }
 
-        if (isPossible == false) {
-            System.out.println("NO");
-        } else {
-            System.out.println(sb);
-        }
+
+        System.out.println(sb);
 
     }
 }
