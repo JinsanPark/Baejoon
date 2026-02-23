@@ -6,75 +6,85 @@ import java.util.Collections;
 
 public class Main {
 
-    static int N;
-    static int[][] map;
+    static int[] dx = {-1,1,0,0};
+    static int[] dy = {0,0,1,-1};
+    static int[][] apartments;
     static boolean[][] visited;
-    static int[] dx = {-1, 1, 0, 0};
-    static int[] dy = {0, 0, -1, 1};
+    static int N;
     static int count;
 
     public static void main(String[] args) throws IOException {
 
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         N = Integer.parseInt(br.readLine());
-        map = new int[N + 1][N + 1];
-        visited = new boolean[N + 1][N + 1];
-        ArrayList<Integer> resultList = new ArrayList<>();
+        apartments = new int[N][N];
+        visited = new boolean[N][N];
+        count = 0;
+        ArrayList<Integer> list = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
 
-        for (int i = 1; i <= N; i++) {
+        for (int x = 0; x < N; x++) {
 
-            String[] input = br.readLine().split("");
+            String line = br.readLine();
 
-            for(int j = 1; j <= N; j++) {
+            for (int y = 0; y < N; y++) {
 
-                map[i][j] = Integer.parseInt(input[j - 1]);
+                apartments[x][y] = line.charAt(y) - 48;
+                visited[x][y] = false;
 
             }
         }
 
-        for (int i = 1; i <= N; i++) {
-            for (int j = 1; j <= N; j++) {
 
-                if (map[i][j] == 1 && !visited[i][j]) {
+        for (int x = 0; x < N; x++) {
+            for (int y = 0; y < N; y++) {
 
+                if (!visited[x][y] && apartments[x][y] == 1) {
                     count = 0;
-                    dfs(i, j);
-                    resultList.add(count);
-
+                    dfs(x,y);
+                    list.add(count);
                 }
 
             }
         }
 
-        System.out.println(resultList.size());
-        Collections.sort(resultList);
-        for (int i = 0; i < resultList.size(); i++) {
-            System.out.println(resultList.get(i));
+        Collections.sort(list);
+        sb.append(list.size()).append("\n");
+
+        for (int i : list) {
+            sb.append(i).append("\n");
         }
+
+        System.out.println(sb);
+
 
     }
+    
 
-    public static void dfs(int x, int y) {
+    public static int dfs(int x, int y) {
 
-        visited[x][y] = true;
-        count++;
+        if (!visited[x][y]) {
 
-        for (int k = 0; k < 4; k++) {
+            visited[x][y] = true;
+            count++;
+            int nx;
+            int ny;
 
-            int nx = x + dx[k];
-            int ny = y + dy[k];
+            for (int i = 0; i < 4; i++) {
 
-            if (nx > 0 && nx <= N && ny > 0 && ny <= N) {
+                nx = x + dx[i];
+                ny = y + dy[i];
 
-                if (map[nx][ny] == 1 && !visited[nx][ny]) {
-                    dfs(nx, ny);
+                if (nx >= 0 && nx < N  && ny >= 0 && ny < N && !visited[nx][ny] && apartments[nx][ny] == 1) {
+                    dfs(nx,ny);
                 }
 
             }
 
 
         }
+
+        return count;
 
     }
 
