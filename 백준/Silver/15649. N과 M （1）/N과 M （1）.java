@@ -5,9 +5,10 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-    static int M,N;
-    static boolean visited[];
+    static int N, M, count;
     static int[] arr;
+    static boolean[] visited;
+    static StringBuilder sb = new StringBuilder();
 
     public static void main(String[] args) throws IOException {
 
@@ -17,42 +18,41 @@ public class Main {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
 
-        visited = new boolean[N];
-        arr = new int[M];
+        arr = new int[M + 1];
+        visited = new boolean[N + 1];
 
 
-            dfs(0);
+        for (int i = 1; i <= N; i++) {
+            visited[i] = false;
+        }
 
+        dfs(1);
+
+        System.out.println(sb);
 
     }
 
-    public static void dfs(int depth) {
+    public static void dfs(int i) {
 
-        if (depth == M) {
-
-            for (int val : arr) {
-                System.out.print(val + 1  + " ");
+        if (i > M) {
+            for (int j = 1; j <= M; j++) {
+                sb.append(arr[j]).append(" ");
             }
-
-            System.out.println();
+            sb.append("\n");
             return;
-
         }
 
-        for (int i = 0; i < N; i++) {
+        for (int j = 1; j <= N; j++) {
 
-            if (!visited[i]) {
-                visited[i] = true;
-
-                arr[depth] = i;
-
-                dfs(depth + 1);
-
-                visited[i] = false;
+            if (!visited[j]) {
+                visited[j] = true;
+                arr[i] = j;
+                dfs(i + 1);
+                visited[j] = false;
             }
 
-
         }
+
 
     }
 
