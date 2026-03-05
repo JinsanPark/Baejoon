@@ -1,38 +1,37 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        //배열에 입력받아 저장
-        //가장 긴 단어 찾아서 그 수를 저장 - maxLength
-        //세로로 읽기.
-        //합치기
 
-        Scanner sc = new Scanner(System.in);
-        String[] inputArray = new String[5];
-        for (int i = 0; i < 5; i++) {
-            inputArray[i] = sc.nextLine();
-        }
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        String[][] st = new String[5][15];
 
-        String result ="";
-        int maxLength = 0;
         for (int i = 0; i < 5; i++) {
 
-            if (inputArray[i].length() > maxLength) {
-                maxLength = inputArray[i].length();
+            String[] line = br.readLine().split("");
+
+            for (int j = 0; j < line.length; j++) {
+                st[i][j] = line[j];
             }
+
         }
 
-        for (int i = 0; i < maxLength; i++) {
+        for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 5; j++) {
-                if (inputArray[j].length() > i) {
-                    char ch = inputArray[j].charAt(i);
-                    result += ch;
+                
+                if (st[j][i] != null) {
+                    sb.append(st[j][i]);
                 }
 
             }
         }
 
-        System.out.println(result);
+        System.out.println(sb);
+
+
     }
 }
